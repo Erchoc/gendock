@@ -1,9 +1,9 @@
 class Gendock < Formula
   desc "Local-first CLI for unified generative AI workflows"
   homepage "https://github.com/Erchoc/gendock"
-  url "https://github.com/Erchoc/gendock/releases/download/v0.1.0/gendock-v0.1.0-aarch64-apple-darwin.tar.gz"
-  version "0.1.0"
-  sha256 "24805f24d58f9649ad4ac86f4ebe05be852c7ec80cfdead04500485790b0237b"
+  url "https://github.com/Erchoc/gendock/releases/download/v0.1.1/gendock-v0.1.1-aarch64-apple-darwin.tar.gz"
+  version "0.1.1"
+  sha256 "6cc1054a4364bd9cacd511aa1f3085701824c29aac60416f124d6ea8063cbb62"
   license "MIT"
 
   depends_on :macos
