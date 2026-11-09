@@ -1,125 +1,72 @@
 # gendock
 
-An agent-first CLI for local AI creation. Its goal is to curate and package practical mainstream text, image, audio and video solutions so users can work with local models without learning inference engines or environment setup. Ask an agent to create something with gendock, or run the commands yourself. Built with Rust, starting with macOS Apple Silicon.
+One CLI for local AI creation.
 
-See [功能进度与完成度](docs/features.md) for available features, readiness percentages and remaining work.
+Gendock brings local AIGC models and inference backends together behind a simple interface. Generate content on your own machine, or share one AI machine across multiple devices. Use it from a terminal, an app, or an AI agent.
 
-**Early development:** local model management, image generation/editing, and an authenticated shared-device service work. Async clients share a durable FIFO queue with one GPU job at a time, cancellation, restart recovery and completion events. The first recipe uses FLUX.2 Klein 4B; local model files and registered private execution components are required. Automatic component installation, music and video generation remain in development. See [image generation](docs/image-generation.md) and [shared-device service](docs/server.md).
+- **Local AI:** bring image, text, audio, and video workflows into one tool.
+- **Multiple models and backends:** choose a model for your task without learning each backend's commands.
+- **Multiple devices:** run models on one Mac and submit tasks from other computers.
+- **Standard interfaces:** integrate through JSON CLI output and an authenticated HTTP API. MCP support is planned.
+
+## Current status
+
+Early development, starting with macOS Apple Silicon.
+
+Model management, image generation and editing, and remote task submission work today. Shared tasks support queuing, cancellation, status updates, and result downloads. The first verified model is FLUX.2 Klein 4B, using a private MLX-based runtime.
+
+More models and backends, text, audio, video, automatic runtime installation, and MCP are planned. Model weights and the image runtime must currently be prepared separately. See [feature status](docs/features.md) for details.
 
 ## Install
 
-Install the macOS Apple Silicon binary with Homebrew:
+On an Apple Silicon Mac:
 
 ```sh
 brew tap Erchoc/gendock https://github.com/Erchoc/gendock
 brew install Erchoc/gendock/gendock
-# Later:
-brew update && brew upgrade gendock
 ```
 
-The tap formula is generated with the archive SHA-256 at release time. The CLI binary does not bundle model weights or the private inference runtime. Intel Macs, signing and notarization are not currently included. See [release operations](docs/releases.md).
-
-From source, with Rust installed:
+Update:
 
 ```sh
-cargo install --path . --locked
+brew update
+brew upgrade gendock
 ```
 
-## Examples
+## Use
+
+With a supported model and runtime ready:
 
 ```sh
-# Generate an image in the current directory (image_MMDD_HHMM.png)
-gendock image generate --prompt "A watercolor fox"
+# Create an image
+gendock image generate --prompt "A watercolor fox" --out fox.png
 
-# Choose an output filename
-gendock image generate --prompt "A cabin by the sea at sunset" --out cabin.png
+# Edit an image
+gendock image edit --input fox.png --prompt "Add a snowy forest" --out winter.png
 
-# Select a model and make the result reproducible
-gendock image generate --model flux2-klein-4b-q4 --prompt "A watercolor fox" --seed 42 --out fox.png
-
-# Edit an existing image, preserving the original
-gendock image edit --input cabin.png --prompt "Make it a snowy winter scene"
-
-# Inspect a recorded task
-gendock job info --id 1
-```
-
-The following interfaces are planned and currently return `not_implemented`:
-
-```sh
-gendock music generate --prompt "Warm acoustic folk with vocals" --lyrics-file lyrics.txt --seconds 60 --out song.wav
-gendock video generate --image cabin.png --prompt "Waves roll in" --seconds 5 --out cabin.mp4
-```
-
-## Shared device
-
-```sh
-# On the Mac: start in the background and issue a caller token
- gendock server start --daemon
- gendock server token --name alice
-
-# Submit, then use the returned task ID
- gendock image generate --prompt "A blue cup" --async
- gendock job wait --id 1 --timeout 600
- gendock job fetch --id 1 --out ./results
- gendock server stop
-```
-
-`gendock server start` runs in the foreground with colored, leveled logs. Use `--daemon` for background execution or `--register` to install/start the macOS login service `gendockd`; `server unregister` removes that registration. Startup failures remain JSON.
-
-For other computers, configure the listener and set `GENDOCK_URL`/`GENDOCK_TOKEN` on each client. See [service setup and API](docs/server.md) for caller isolation, uploads, recovery and current limits. The client does not need model weights or inference components.
-
-## Defaults
-
-Use `gendock config list/get/set/unset/path` to manage global settings:
-
-```sh
-gendock config set output.image /absolute/cloud-sync/images
-gendock config set remote.endpoint https://gendock.example.com
-gendock config set remote.api_key YOUR_KEY
-gendock config set power.prevent_sleep true
-```
-
-Images export to the configured directory when `--out` is omitted; the default remains the invocation directory. See [global configuration](docs/configuration.md) for precedence, API key redaction, per-media directories and current limitations.
-
-Edit `~/.config/gendock/config.toml` (or `$XDG_CONFIG_HOME/gendock/config.toml`):
-
-```toml
-[defaults]
-image_generate = "flux2-klein-4b-q4"
-image_edit = "flux2-klein-4b-q4"
-```
-
-The file is created on first image execution. `--model` overrides it for one command. Missing local models return an error with a download suggestion; execution never downloads automatically.
-
-## Models
-
-```sh
+# Find models
 gendock model search flux
-gendock model info --model flux2-klein-4b-q4
-gendock model download --model flux2-klein-4b-q4
 
-# Attach existing files to a supported model; no copying or backend selection
-gendock model add --name flux2-klein-4b-q4 --path /path/to/model
+# Explore commands
+gendock --help
 ```
 
-Downloads accept `--endpoint hf-mirror`, `--proxy URL` and `--models-dir PATH`. User definitions can be imported with `model add --manifest FILE`. See [model management](docs/models.md).
-
-Operations return a standard [JSON response](docs/json-contract.md); help is plain text. Use `gendock --help` to discover commands. Data follows XDG directories, including on macOS.
-
-## Contributing
-
-Read [CONTRIBUTING.md](CONTRIBUTING.md), [AGENTS.md](AGENTS.md), [architecture](docs/architecture.md) and [roadmap](docs/roadmap.md).
+To share a Mac with other devices, start the service and create a client token:
 
 ```sh
-cargo fmt --all --check
-cargo clippy --locked --all-targets --all-features -- -D warnings
-cargo test --locked
-./scripts/e2e.sh       # CLI/HTTP/queue pipeline using tiny private workers
-./scripts/e2e-real.sh  # Opt-in actual-model generation → editing → fetch
+gendock server start --daemon --host
+gendock server token --name alice
 ```
 
-See [testing and acceptance](docs/testing.md) for prerequisites, individual test commands and retained real-model artifacts.
+Configure the server address and token on each client, then submit tasks remotely. See [shared-device setup and API](docs/server.md).
+
+## Learn more
+
+- [Models and runtime setup](docs/image-generation.md)
+- [Configuration](docs/configuration.md)
+- [HTTP API](docs/server.md) and [JSON format](docs/json-contract.md)
+- [Roadmap](docs/roadmap.md)
+- [Contributing](CONTRIBUTING.md)
 
 ## License
 
