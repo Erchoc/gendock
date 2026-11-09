@@ -26,12 +26,16 @@ A resident service, basic scheduling and completion notifications are core requi
 - Extend recipes and hardware checks for other models; validate recommendations through real runs.
 - Improve available-memory checks and download progress.
 
+## CLI distribution
+
+Public GitHub hosting, main/dev branches, weekly threshold-based releases, Apple Silicon macOS archives/checksums and a same-repository Homebrew tap are implemented; see [release operations](releases.md). The v0.1.0 pipeline and real Homebrew install/test have passed. Signing, notarization, Intel builds and complete private runtime delivery remain future work.
+
 ## Later
 
 - Versioned database upgrades after the 1.0 baseline is released.
 - LTX video adapter, audio and music adapters.
 - Additional remote task types and optional MCP sharing the implemented service core.
-- Signed macOS distribution and release automation.
+- Signed and notarized macOS distribution.
 - Optional model publishing/upload workflows (public R2 URLs already work for download).
 - Cloud compute/storage adapters and client synchronization.
 - Desktop/App clients; Linux and Windows after macOS.
