@@ -1,0 +1,51 @@
+name: Release macOS
+on:
+  schedule:
+    # Sunday 09:00 Asia/Shanghai (UTC+8).
+    - cron: '0 1 * * 0'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: Release even with fewer than four new commits (bootstrap/manual release)
+        type: boolean
+        default: false
+permissions:
+  contents: write
+concurrency:
+  group: release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: dev
+          fetch-depth: 0
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - name: Plan release
+        id: plan
+        env:
+          FORCE: ${{ inputs.force || false }}
+        run: python3 scripts/release.py plan
+      - name: Verify and package
+        if: steps.plan.outputs.release == 'true'
+        run: |
+          cargo fmt --all --check
+          cargo clippy --locked --all-targets --all-features -- -D warnings
+          cargo test --locked
+          ./scripts/e2e.sh
+          cargo build --release --locked --target aarch64-apple-darwin
+          python3 scripts/release.py package
+      - uses: actions/upload-artifact@v4
+        if: steps.plan.outputs.release == 'true'
+        with:
+          name: macos-release
+          path: target/dist/*
+      - name: Publish branches, tag and GitHub Release
+        if: steps.plan.outputs.release == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/release.py publish

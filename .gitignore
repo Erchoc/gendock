@@ -1,0 +1,12 @@
+/target/
+__pycache__/
+*.pyc
+.DS_Store
+.env
+.env.*
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm
+*.log
+# Default CLI exports are local user artifacts.
+/image_*.png

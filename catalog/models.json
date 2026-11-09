@@ -1,0 +1,255 @@
+[
+  {
+    "id": "flux2-klein-4b-q4",
+    "name": "FLUX.2 Klein 4B (4-bit)",
+    "repository": "mflux-community/flux2-klein-4b-mflux-q4",
+    "revision": "794cd159538149ad9830848508c31f0ea7088e58",
+    "license": "apache-2.0",
+    "backend": "mflux",
+    "tasks": [
+      "image.generate",
+      "image.edit"
+    ],
+    "minimum_memory_gib": 16,
+    "files": [
+      {
+        "path": "README.md",
+        "size": 2948,
+        "hash": "2b0bc1af2f5395b4efa6020642b249395261bb91",
+        "algorithm": "git_sha1",
+        "url": "https://huggingface.co/mflux-community/flux2-klein-4b-mflux-q4/resolve/794cd159538149ad9830848508c31f0ea7088e58/README.md"
+      },
+      {
+        "path": "text_encoder/0.safetensors",
+        "size": 2135435237,
+        "hash": "e59ed2b6825cb8ae3d0ba1e8a43575a565d465ce4518b7d79d28020b19b639cd",
+        "algorithm": "sha256",
+        "url": "https://huggingface.co/mflux-community/flux2-klein-4b-mflux-q4/resolve/794cd159538149ad9830848508c31f0ea7088e58/text_encoder/0.safetensors"
+      },
+      {
+        "path": "text_encoder/1.safetensors",
+        "size": 127582075,
+        "hash": "edbdea3187bc4a0ad0e1ecb7152da8e6b344669413d9e45be5e7a2244f398ee3",
+        "algorithm": "sha256",
+        "url": "https://huggingface.co/mflux-community/flux2-klein-4b-mflux-q4/resolve/794cd159538149ad9830848508c31f0ea7088e58/text_encoder/1.safetensors"
+      },
+      {
+        "path": "text_encoder/model.safetensors.index.json",
+        "size": 51332,
+        "hash": "c5243cc3083c6cae3516aceac108510ebc088fb8",
+        "algorithm": "git_sha1",
+        "url": "https://huggingface.co/mflux-community/flux2-klein-4b-mflux-q4/resolve/794cd159538149ad9830848508c31f0ea7088e58/text_encoder/model.safetensors.index.json"
+      },
+      {
+        "path": "tokenizer/chat_template.jinja",
+        "size": 4168,
+        "hash": "01be9b307daa2d425f7c168c9fb145a286e0afb4",
+        "algorithm": "git_sha1",
+        "url": "https://huggingface.co/mflux-community/flux2-klein-4b-mflux-q4/resolve/794cd159538149ad9830848508c31f0ea7088e58/tokenizer/chat_template.jinja"
+      },
+      {
+        "path": "tokenizer/tokenizer.json",
+        "size": 11422650,
+        "hash": "be75606093db2094d7cd20f3c2f385c212750648bd6ea4fb2bf507a6a4c55506",
+        "algorithm": "sha256",
+        "url": "https://huggingface.co/mflux-community/flux2-klein-4b-mflux-q4/resolve/794cd159538149ad9830848508c31f0ea7088e58/tokenizer/tokenizer.json"
+      },
+      {
+        "path": "tokenizer/tokenizer_config.json",
+        "size": 376,
+        "hash": "f05f2181d527a9b7a4c451a6d6be94bb4db5e329",
+        "algorithm": "git_sha1",
+        "url": "https://huggingface.co/mflux-community/flux2-klein-4b-mflux-q4/resolve/794cd159538149ad9830848508c31f0ea7088e58/tokenizer/tokenizer_config.json"
+      },
+      {
+        "path": "transformer/0.safetensors",
+        "size": 2145323769,
+        "hash": "36796395e3946496f3e118f26fe22594b1d7d871342a59dd7824349d91c08266",
+        "algorithm": "sha256",
+        "url": "https://huggingface.co/mflux-community/flux2-klein-4b-mflux-q4/resolve/794cd159538149ad9830848508c31f0ea7088e58/transformer/0.safetensors"
+      },
+      {
+        "path": "transformer/1.safetensors",
+        "size": 34727728,
+        "hash": "9730ae148ca4f5ffc62860748b849a70987f0b7301588248bd98a2af9bc15070",
+        "algorithm": "sha256",
+        "url": "https://huggingface.co/mflux-community/flux2-klein-4b-mflux-q4/resolve/794cd159538149ad9830848508c31f0ea7088e58/transformer/1.safetensors"
+      },
+      {
+        "path": "transformer/model.safetensors.index.json",
+        "size": 26908,
+        "hash": "ea6683bb06706031bd4b948d6602444a09d8b5a8",
+        "algorithm": "git_sha1",
+        "url": "https://huggingface.co/mflux-community/flux2-klein-4b-mflux-q4/resolve/794cd159538149ad9830848508c31f0ea7088e58/transformer/model.safetensors.index.json"
+      },
+      {
+        "path": "vae/0.safetensors",
+        "size": 165107888,
+        "hash": "688ae0c3d2e93573ce8a6d3561d793cf6de5a4207b2e128cad6cd0d71e43b10f",
+        "algorithm": "sha256",
+        "url": "https://huggingface.co/mflux-community/flux2-klein-4b-mflux-q4/resolve/794cd159538149ad9830848508c31f0ea7088e58/vae/0.safetensors"
+      },
+      {
+        "path": "vae/model.safetensors.index.json",
+        "size": 17547,
+        "hash": "5ae83dc6e107cf23caa90d73b5191339a0af9dd9",
+        "algorithm": "git_sha1",
+        "url": "https://huggingface.co/mflux-community/flux2-klein-4b-mflux-q4/resolve/794cd159538149ad9830848508c31f0ea7088e58/vae/model.safetensors.index.json"
+      }
+    ],
+    "origin": "builtin",
+    "family": "flux",
+    "type": "image",
+    "description": "FLUX.2 Klein 4B (4-bit) weights in mflux format.",
+    "homepage_url": "https://huggingface.co/mflux-community/flux2-klein-4b-mflux-q4",
+    "status": "active",
+    "recommended": false
+  },
+  {
+    "id": "flux1-schnell-q4",
+    "name": "FLUX.1 Schnell (4-bit)",
+    "repository": "madroid/flux.1-schnell-mflux-4bit",
+    "revision": "4a5ef87e8f50a9d8576ea2f01e3bb4f00c5f1f5d",
+    "license": "apache-2.0",
+    "backend": "mflux",
+    "tasks": [
+      "image.generate"
+    ],
+    "minimum_memory_gib": 16,
+    "files": [
+      {
+        "path": "README.md",
+        "size": 149,
+        "hash": "17075f8bd770aa35726868cf18792ef67e3c4974",
+        "algorithm": "git_sha1",
+        "url": "https://huggingface.co/madroid/flux.1-schnell-mflux-4bit/resolve/4a5ef87e8f50a9d8576ea2f01e3bb4f00c5f1f5d/README.md"
+      },
+      {
+        "path": "config.json",
+        "size": 54,
+        "hash": "f97d75665b9e65e036ccb80ed990630808a33b17",
+        "algorithm": "git_sha1",
+        "url": "https://huggingface.co/madroid/flux.1-schnell-mflux-4bit/resolve/4a5ef87e8f50a9d8576ea2f01e3bb4f00c5f1f5d/config.json"
+      },
+      {
+        "path": "text_encoder/0.safetensors",
+        "size": 124067769,
+        "hash": "87bafc13b6598011335a0f0a86e0714a55524d6e2fa40cb93b46040a4610b266",
+        "algorithm": "sha256",
+        "url": "https://huggingface.co/madroid/flux.1-schnell-mflux-4bit/resolve/4a5ef87e8f50a9d8576ea2f01e3bb4f00c5f1f5d/text_encoder/0.safetensors"
+      },
+      {
+        "path": "text_encoder_2/0.safetensors",
+        "size": 2146329953,
+        "hash": "ff803fd05b4d48c106c31e1cc5e94b265248a023e4dbd341a8f9c6c0e02e8afd",
+        "algorithm": "sha256",
+        "url": "https://huggingface.co/madroid/flux.1-schnell-mflux-4bit/resolve/4a5ef87e8f50a9d8576ea2f01e3bb4f00c5f1f5d/text_encoder_2/0.safetensors"
+      },
+      {
+        "path": "text_encoder_2/1.safetensors",
+        "size": 722093908,
+        "hash": "d2fc465f78133b2f993ca3bc42aeb8869b5931b098438b99f5d1bdf079f2aca7",
+        "algorithm": "sha256",
+        "url": "https://huggingface.co/madroid/flux.1-schnell-mflux-4bit/resolve/4a5ef87e8f50a9d8576ea2f01e3bb4f00c5f1f5d/text_encoder_2/1.safetensors"
+      },
+      {
+        "path": "tokenizer/merges.txt",
+        "size": 524619,
+        "hash": "76e821f1b6f0a9709293c3b6b51ed90980b3166b",
+        "algorithm": "git_sha1",
+        "url": "https://huggingface.co/madroid/flux.1-schnell-mflux-4bit/resolve/4a5ef87e8f50a9d8576ea2f01e3bb4f00c5f1f5d/tokenizer/merges.txt"
+      },
+      {
+        "path": "tokenizer/special_tokens_map.json",
+        "size": 588,
+        "hash": "cf0682d6de72c1547f41b4f6d7c59f62deffef94",
+        "algorithm": "git_sha1",
+        "url": "https://huggingface.co/madroid/flux.1-schnell-mflux-4bit/resolve/4a5ef87e8f50a9d8576ea2f01e3bb4f00c5f1f5d/tokenizer/special_tokens_map.json"
+      },
+      {
+        "path": "tokenizer/tokenizer_config.json",
+        "size": 725,
+        "hash": "fa68d34b2c764d749e29ace3632691499f58aad6",
+        "algorithm": "git_sha1",
+        "url": "https://huggingface.co/madroid/flux.1-schnell-mflux-4bit/resolve/4a5ef87e8f50a9d8576ea2f01e3bb4f00c5f1f5d/tokenizer/tokenizer_config.json"
+      },
+      {
+        "path": "tokenizer/vocab.json",
+        "size": 1059962,
+        "hash": "469be27c5c010538f845f518c4f5e8574c78f7c8",
+        "algorithm": "git_sha1",
+        "url": "https://huggingface.co/madroid/flux.1-schnell-mflux-4bit/resolve/4a5ef87e8f50a9d8576ea2f01e3bb4f00c5f1f5d/tokenizer/vocab.json"
+      },
+      {
+        "path": "tokenizer_2/added_tokens.json",
+        "size": 2593,
+        "hash": "3f5132007c4fcf42b75b65c8b6aa49c7098bcdf4",
+        "algorithm": "git_sha1",
+        "url": "https://huggingface.co/madroid/flux.1-schnell-mflux-4bit/resolve/4a5ef87e8f50a9d8576ea2f01e3bb4f00c5f1f5d/tokenizer_2/added_tokens.json"
+      },
+      {
+        "path": "tokenizer_2/special_tokens_map.json",
+        "size": 2543,
+        "hash": "17ade346a1042cbe0c1436f5bedcbd85c099d582",
+        "algorithm": "git_sha1",
+        "url": "https://huggingface.co/madroid/flux.1-schnell-mflux-4bit/resolve/4a5ef87e8f50a9d8576ea2f01e3bb4f00c5f1f5d/tokenizer_2/special_tokens_map.json"
+      },
+      {
+        "path": "tokenizer_2/spiece.model",
+        "size": 791656,
+        "hash": "d60acb128cf7b7f2536e8f38a5b18a05535c9e14c7a355904270e15b0945ea86",
+        "algorithm": "sha256",
+        "url": "https://huggingface.co/madroid/flux.1-schnell-mflux-4bit/resolve/4a5ef87e8f50a9d8576ea2f01e3bb4f00c5f1f5d/tokenizer_2/spiece.model"
+      },
+      {
+        "path": "tokenizer_2/tokenizer_config.json",
+        "size": 20838,
+        "hash": "c03f2d72d11fe7c2be76a8a19d1b14a2b60dfb05",
+        "algorithm": "git_sha1",
+        "url": "https://huggingface.co/madroid/flux.1-schnell-mflux-4bit/resolve/4a5ef87e8f50a9d8576ea2f01e3bb4f00c5f1f5d/tokenizer_2/tokenizer_config.json"
+      },
+      {
+        "path": "transformer/0.safetensors",
+        "size": 2124145064,
+        "hash": "1e30cc9df188e18c5227d3a2b91627e951b9cbfde5f619416368dba8646cccbd",
+        "algorithm": "sha256",
+        "url": "https://huggingface.co/madroid/flux.1-schnell-mflux-4bit/resolve/4a5ef87e8f50a9d8576ea2f01e3bb4f00c5f1f5d/transformer/0.safetensors"
+      },
+      {
+        "path": "transformer/1.safetensors",
+        "size": 2141393586,
+        "hash": "83f02f2540c5ecffddfcb3efd315ea505787cb115d3952e965a4558257155fec",
+        "algorithm": "sha256",
+        "url": "https://huggingface.co/madroid/flux.1-schnell-mflux-4bit/resolve/4a5ef87e8f50a9d8576ea2f01e3bb4f00c5f1f5d/transformer/1.safetensors"
+      },
+      {
+        "path": "transformer/2.safetensors",
+        "size": 2146515444,
+        "hash": "4c086f1198c288999d44449976571793293a0af3535125ee321b8ff333002482",
+        "algorithm": "sha256",
+        "url": "https://huggingface.co/madroid/flux.1-schnell-mflux-4bit/resolve/4a5ef87e8f50a9d8576ea2f01e3bb4f00c5f1f5d/transformer/2.safetensors"
+      },
+      {
+        "path": "transformer/3.safetensors",
+        "size": 281697267,
+        "hash": "702f3347cb53b40fb8678e22c70dcbfd4d5dfd2a6071bf72636750be9e0f4403",
+        "algorithm": "sha256",
+        "url": "https://huggingface.co/madroid/flux.1-schnell-mflux-4bit/resolve/4a5ef87e8f50a9d8576ea2f01e3bb4f00c5f1f5d/transformer/3.safetensors"
+      },
+      {
+        "path": "vae/0.safetensors",
+        "size": 164654128,
+        "hash": "85038aa180082cc651c883f2a8b3831e3267fd2cb97f80471b4e5a7897082a19",
+        "algorithm": "sha256",
+        "url": "https://huggingface.co/madroid/flux.1-schnell-mflux-4bit/resolve/4a5ef87e8f50a9d8576ea2f01e3bb4f00c5f1f5d/vae/0.safetensors"
+      }
+    ],
+    "origin": "builtin",
+    "family": "flux",
+    "type": "image",
+    "description": "FLUX.1 Schnell (4-bit) weights in mflux format.",
+    "homepage_url": "https://huggingface.co/madroid/flux.1-schnell-mflux-4bit",
+    "status": "active",
+    "recommended": false
+  }
+]
