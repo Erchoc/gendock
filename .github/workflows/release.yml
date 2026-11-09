@@ -16,7 +16,9 @@ concurrency:
   cancel-in-progress: false
 jobs:
   release:
-    runs-on: macos-14
+    runs-on: macos-15
+    env:
+      MACOSX_DEPLOYMENT_TARGET: '14.0'
     steps:
       - uses: actions/checkout@v4
         with:
@@ -33,6 +35,7 @@ jobs:
       - name: Verify and package
         if: steps.plan.outputs.release == 'true'
         run: |
+          python3 -m unittest discover -s tests -p 'test_release.py'
           cargo fmt --all --check
           cargo clippy --locked --all-targets --all-features -- -D warnings
           cargo test --locked
