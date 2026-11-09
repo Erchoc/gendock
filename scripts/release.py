@@ -64,7 +64,6 @@ def package():
         for path, name in [(binary, 'bin/gendock'), (ROOT / 'LICENSE', 'LICENSE'), (ROOT / 'README.md', 'README.md')]:
             bundle.add(path, arcname=name)
     digest = hashlib.sha256(archive.read_bytes()).hexdigest()
-    (dist / 'SHA256SUMS').write_text(f'{digest}  {archive.name}\n')
     formula = ROOT / 'Formula/gendock.rb'
     formula.parent.mkdir(exist_ok=True)
     formula.write_text(f'''class Gendock < Formula
@@ -106,7 +105,7 @@ def publish():
     run('git', 'tag', tag)
     run('git', 'push', '--atomic', 'origin', 'HEAD:refs/heads/main', 'HEAD:refs/heads/dev', f'refs/tags/{tag}')
     run('gh', 'release', 'create', tag, '--verify-tag', '--title', tag, '--generate-notes',
-        *map(str, sorted((ROOT / 'target/dist').iterdir())))
+        str(ROOT / f'target/dist/gendock-v{version}-aarch64-apple-darwin.tar.gz'))
 
 
 if __name__ == '__main__':

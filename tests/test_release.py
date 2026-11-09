@@ -51,6 +51,25 @@ class ReleasePlanTests(unittest.TestCase):
         root, _ = self.check_plan(0, force=True)
         self.assertEqual(json.loads((root / 'target/plan.json').read_text())['version'], '0.1.0')
 
+    def test_publish_uploads_only_versioned_binary_archive(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            dist = root / 'target/dist'
+            dist.mkdir(parents=True)
+            archive = dist / 'gendock-v0.1.1-aarch64-apple-darwin.tar.gz'
+            archive.touch()
+            (dist / 'SHA256SUMS').write_text('stale checksum from an earlier build')
+            (dist / 'gendock-v0.1.0-aarch64-apple-darwin.tar.gz').touch()
+            state = root / 'target/plan.json'
+            state.write_text(json.dumps({'version': '0.1.1', 'head': 'abc123'}))
+            with patch.object(release, 'ROOT', root), patch.object(release, 'STATE', state), patch.object(release, 'run', return_value='abc123') as command:
+                release.publish()
+            upload = command.call_args.args
+            self.assertEqual(upload[:4], ('gh', 'release', 'create', 'v0.1.1'))
+            self.assertEqual(upload[-1], str(archive))
+            self.assertNotIn(str(dist / 'SHA256SUMS'), upload)
+            self.assertEqual(sum(arg.endswith('.tar.gz') for arg in upload), 1)
+
     def test_higher_declared_version_is_preserved(self):
         root, _ = self.check_plan(4, tags='v0.1.5', current='0.2.0')
         self.assertEqual(json.loads((root / 'target/plan.json').read_text())['version'], '0.2.0')

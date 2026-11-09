@@ -83,7 +83,7 @@ gendock 为用户筛选、验证并封装文字、图片、音频和视频领域
 | XDG 目录规则 | 完成 | 100% | 当前 Mac CLI 配置/数据/状态/缓存分离，支持绝对环境覆盖；不代表其他系统功能已支持 |
 | 当前本地 schema 初始化 | 完成 | 100% | 1.0 前单一 SQL snapshot、WAL、兼容库保留、不兼容库明确报错；1.0 后迁移尚未实现 |
 | 产物归档与导出 | 可用 | 80% | 原始产物/输入快照、哈希、当前目录时间命名、防覆盖；清理策略、保留期限和云同步待补 |
-| CLI 安装与发布 | 基本可用 | 80% | 公开 GitHub 仓库；main/dev 双分支；周日北京时间 09:00 检查 dev，距上次发布至少 4 个提交自动验证并发版；macOS Apple Silicon tar.gz、SHA256SUMS 与同仓 Homebrew tap，见 [发布流程](releases.md)。本地及 GitHub Actions release 构建、77 项 Rust 测试与 4 项发布计划测试通过；v0.1.0 真实 Release 下载、brew install/test 与无更新 upgrade 检查通过；Intel、签名、公证和完整运行环境交付待完成 |
+| CLI 安装与发布 | 基本可用 | 80% | 公开 GitHub 仓库；main/dev 双分支；周日北京时间 09:00 检查 dev，距上次发布至少 4 个提交自动验证并发版；macOS Apple Silicon tar.gz（只发布二进制包，校验值保存在 Homebrew 配方）与同仓 Homebrew tap，见 [发布流程](releases.md)。本地及 GitHub Actions release 构建、77 项 Rust 测试与 5 项发布计划/附件测试通过；v0.1.0→v0.1.1 真实 Release 下载、brew install/test/upgrade 通过；清理旧 Cargo 安装后命令版本与 Homebrew/Release 一致；Intel、签名、公证和完整运行环境交付待完成 |
 | 自动化测试与 CI | 可用 | 80% | 本地 77 项单元/集成测试通过；另有真实模型 E2E 与真实 launchd 注册/撤销显式运行通过；脚本覆盖 CLI→HTTP→队列→改图→取回，常规测试跳过真实模型与联网检查；更多硬件/持续负载待补 |
 | 全局配置管理 | `config list/get/set/unset/path` 可用 | 80% | 原子写入/跨进程锁、严格校验、默认值恢复、API Key 脱敏；配置测试覆盖非法更新保留及并发独立字段更新。手动编辑需避免并发，CLI 更新会重写 TOML 注释/排版 |
 | 全局远程连接设置 | 客户端配置已接入 | 60% | `remote.endpoint` 与可选 `remote.api_key`，命令行/环境变量优先；未配置 Key 不发送鉴权头，服务端仍可要求鉴权；多人实测待完成 |

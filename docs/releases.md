@@ -6,7 +6,7 @@ The public repository is https://github.com/Erchoc/gendock. Use only `main` (lat
 
 A release validates formatting, clippy, locked tests and the deterministic CLI/HTTP E2E, then builds `aarch64-apple-darwin` on macOS 15. The first release uses Cargo's current version; later releases increment the previous patch unless Cargo already declares a higher stable version. Cargo.toml, Cargo.lock and the tap formula are committed together. The workflow checks for concurrent dev changes and atomically pushes `main`, `dev` and the tag; divergence fails without overwriting other work. Workflow permissions must allow contents writes; branch rules must permit the release bot's fast-forward pushes.
 
-Assets are `gendock-vVERSION-aarch64-apple-darwin.tar.gz` (executable `bin/gendock`, LICENSE, README) and `SHA256SUMS`. `Formula/gendock.rb` is generated with the exact archive hash, so no separate tap repository or token is required. Install/update:
+The release asset is `gendock-vVERSION-aarch64-apple-darwin.tar.gz` (executable `bin/gendock`, LICENSE, README). No separate checksum file is uploaded. `Formula/gendock.rb` is generated with the exact archive SHA-256, so Homebrew still verifies the download and no separate tap repository or token is required. Install/update:
 
 ```sh
 brew tap Erchoc/gendock https://github.com/Erchoc/gendock
@@ -16,7 +16,9 @@ brew upgrade gendock
 brew test Erchoc/gendock/gendock
 ```
 
-Only Apple Silicon macOS CLI binaries are distributed. Model weights, private runtime installation, Intel binaries, code signing and notarization remain outside this release scope. No model downloads occur in release checks. The scheduled job needs GitHub Actions enabled; GitHub may delay cron jobs and disable scheduled workflows after 60 days of repository inactivity.
+Only Apple Silicon macOS CLI binaries are distributed. If `gendock -V` differs from the installed Homebrew version, check `which -a gendock`: an older Cargo installation may appear first in PATH. When switching to Homebrew, remove the old source installation with `cargo uninstall gendock`, then start a new shell or run `hash -r`. `/opt/homebrew/bin/gendock -V` checks the Homebrew executable directly.
+
+Model weights, private runtime installation, Intel binaries, code signing and notarization remain outside this release scope. No model downloads occur in release checks. The scheduled job needs GitHub Actions enabled; GitHub may delay cron jobs and disable scheduled workflows after 60 days of repository inactivity.
 
 If publishing assets fails after the atomic branch/tag push, rerunning the whole release would create another version. Recover the existing tag's assets from the failed run's build when available, or rebuild that exact tag and verify its archive hash against the committed formula before uploading. Do not mark a release complete until the assets and Homebrew installation have been verified.
 
