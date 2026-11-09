@@ -40,7 +40,13 @@ def plan():
         next_version = (major, minor, patch + 1)
         version = '.'.join(map(str, max(tuple(map(int, current.split('.'))), next_version)))
     manifest.write_text(text.replace(f'version = "{current}"', f'version = "{version}"', 1))
-    run('cargo', 'update', '--offline', '--workspace')
+    lockfile = ROOT / 'Cargo.lock'
+    locktext, replacements = re.subn(
+        r'(\[\[package\]\]\nname = "gendock"\nversion = ")[^"]+("\n)',
+        lambda match: match[1] + version + match[2], lockfile.read_text(),
+    )
+    assert replacements == 1, 'expected one gendock package in Cargo.lock'
+    lockfile.write_text(locktext)
     STATE.parent.mkdir(exist_ok=True)
     STATE.write_text(json.dumps({'version': version, 'head': run('git', 'rev-parse', 'HEAD')}))
 

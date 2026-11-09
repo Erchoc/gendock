@@ -18,6 +18,7 @@ class ReleasePlanTests(unittest.TestCase):
         self.addCleanup(temporary.cleanup)
         root = Path(temporary.name)
         (root / 'Cargo.toml').write_text(f'[package]\nversion = "{current}"\n')
+        (root / 'Cargo.lock').write_text(f'[[package]]\nname = "gendock"\nversion = "{current}"\n\n[[package]]\nname = "dependency"\nversion = "1.0.0"\n')
         output = root / 'output'
 
         def command(*args):
@@ -42,6 +43,9 @@ class ReleasePlanTests(unittest.TestCase):
         root, output = self.check_plan(4, tags='v0.1.0')
         self.assertEqual(output, 'release=true\n')
         self.assertEqual(json.loads((root / 'target/plan.json').read_text())['version'], '0.1.1')
+        lock = (root / 'Cargo.lock').read_text()
+        self.assertIn('name = "gendock"\nversion = "0.1.1"', lock)
+        self.assertIn('name = "dependency"\nversion = "1.0.0"', lock)
 
     def test_first_forced_release_keeps_current_version(self):
         root, _ = self.check_plan(0, force=True)

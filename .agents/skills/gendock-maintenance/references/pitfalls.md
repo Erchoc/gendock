@@ -1,5 +1,9 @@
 # Known pitfalls
 
+## Release runners and lockfiles
+
+GitHub rejected `macos-14` before any steps ran with `macos-14-arm64-us-default is not supported`; macos-15 started successfully. A clean runner has no Cargo registry cache: `cargo update --offline --workspace` failed even when the app version was unchanged. Release planning now edits only the single gendock package version in Cargo.lock and leaves dependency identities intact; subsequent `--locked` validation verifies consistency. Planner regression tests check threshold 3/4 and dependency-version preservation.
+
 ## macOS CLI paths
 
 Do not use platform-default directory helpers that silently select Library/Application Support. The CLI deliberately follows XDG even on macOS. GUI defaults are a separate future decision.
